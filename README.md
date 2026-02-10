@@ -1,2 +1,3 @@
-# cloud-kitchen-website-for-indo-chinese-menu
-Exported from Caffeine project: Cloud kitchen website for Indo-Chinese menu
+## 
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`

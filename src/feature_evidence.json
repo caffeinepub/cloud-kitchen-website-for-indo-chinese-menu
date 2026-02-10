@@ -1,0 +1,77 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-add-an-online-ordering-ui-that-lets-users-add-menu-items-to-a-cart-from-the-menu-adjust-quantities-remove-items-clear-the-cart-and-see-an-order-subtotal",
+      "featureTitle": "Add an online ordering UI that lets users add menu items to a cart from the menu, adjust quantities, remove items, clear the cart, and see an order subtotal.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/layout/SiteHeader.tsx",
+        "frontend/src/components/menu/MenuItemCard.tsx",
+        "frontend/src/components/order/CartButton.tsx",
+        "frontend/src/components/order/CartSheet.tsx",
+        "frontend/src/hooks/useCart.ts",
+        "frontend/src/utils/money.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-checkout-flow-that-collects-order-details-order-type-customer-info-delivery-address-when-applicable-and-optional-special-instructions-and-validates-required-fields-before-allowing-submission",
+      "featureTitle": "Add a checkout flow that collects order details (order type, customer info, delivery address when applicable, and optional special instructions) and validates required fields before allowing submission.",
+      "files": [
+        "frontend/src/components/order/CartSheet.tsx",
+        "frontend/src/components/order/CheckoutDialog.tsx",
+        "frontend/src/components/order/OrderConfirmation.tsx",
+        "frontend/src/utils/orderMeta.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-connect-the-new-checkout-ui-to-the-backend-using-the-existing-actor-react-query-setup-and-add-a-my-orders-view-that-shows-the-authenticated-user-s-submitted-orders",
+      "featureTitle": "Connect the new checkout UI to the backend using the existing actor/React Query setup, and add a 'My Orders' view that shows the authenticated user’s submitted orders.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/auth/LoginButton.tsx",
+        "frontend/src/components/layout/SiteHeader.tsx",
+        "frontend/src/components/order/CheckoutDialog.tsx",
+        "frontend/src/components/orders/MyOrdersSection.tsx",
+        "frontend/src/hooks/useCallerOrders.ts",
+        "frontend/src/hooks/useCreateOrder.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-10"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

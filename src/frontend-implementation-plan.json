@@ -1,0 +1,136 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Online ordering UI (cart, checkout, and My Orders) for the cloud kitchen site",
+  "requirements": [
+    {
+      "id": "REQ-7",
+      "summary": "Add cart functionality from the menu with quantity controls, removal, clear-cart, subtotal, and session persistence.",
+      "acceptanceCriteria": [
+        "Each MenuItemCard provides an obvious control to add the item to the cart.",
+        "Cart UI shows line items with: item name, unit price, quantity controls, line total, and remove action.",
+        "Cart UI shows subtotal and a clear-cart action.",
+        "Cart persists at least for the current browser session (page reload) OR clearly resets and informs the user (choose one behavior and implement consistently).",
+        "All user-facing text is in English."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useCart.ts",
+          "operation": "create",
+          "description": "Create a cart state hook/context (add item, increment/decrement quantity, remove, clear, compute subtotal) with persistence to localStorage for consistent behavior across page reloads in the same browser. Use this as the single source of truth for cart state."
+        },
+        {
+          "path": "frontend/src/utils/money.ts",
+          "operation": "create",
+          "description": "Add small helpers for formatting INR amounts and converting menu prices into the bigint/number representation used by the UI and backend calls (keep user-facing formatting in English)."
+        },
+        {
+          "path": "frontend/src/components/order/CartSheet.tsx",
+          "operation": "create",
+          "description": "Implement the cart UI as an overlay panel using shadcn-ui components (e.g., Sheet/Dialog, Button, Input) to display line items, quantity controls, remove action, clear-cart, and subtotal. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/order/CartButton.tsx",
+          "operation": "create",
+          "description": "Add a header cart button (with item count badge) that opens CartSheet. Use shadcn-ui Button/Badge primitives via composition (do not edit immutable ui components). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/menu/MenuItemCard.tsx",
+          "operation": "modify",
+          "description": "Add an obvious 'Add to Cart' control to each menu item card, wired to the cart context. Use shadcn-ui Button (compose; do not edit files under frontend/src/components/ui). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/layout/SiteHeader.tsx",
+          "operation": "modify",
+          "description": "Wire the new CartButton into the existing header (desktop + mobile) so cart is always accessible while browsing the menu. Keep all user-facing text in English."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wrap the app content with the Cart provider so MenuItemCard, CartSheet, and checkout can share cart state across the single-page layout."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Add a checkout flow from the cart that collects order details, validates required fields, submits, and shows confirmation/error states while keeping inputs intact on failure.",
+      "acceptanceCriteria": [
+        "Checkout is reachable from the cart and displays a clear order summary (items, quantities, subtotal).",
+        "Checkout form includes: order type (Pickup/Delivery), customer name, phone number, and delivery address fields that are required only when Delivery is selected, plus optional special instructions.",
+        "Submit is disabled or shows inline validation errors until required fields are provided.",
+        "After a successful submission, the UI shows an order confirmation state that includes a unique order identifier and a timestamp.",
+        "If submission fails, the UI shows a readable error message and keeps the cart/inputs intact."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/order/CheckoutDialog.tsx",
+          "operation": "create",
+          "description": "Create a checkout dialog reachable from the cart, showing an order summary and a form with order type (Pickup/Delivery), customer name, phone, delivery address (required only for Delivery), and optional special instructions. Use shadcn-ui form-friendly components (Dialog, Select, Input, Textarea, Button) via composition and implement inline validation/disabled submit until valid. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/order/OrderConfirmation.tsx",
+          "operation": "create",
+          "description": "Create a confirmation UI state that displays the returned unique order identifier and a client-side timestamp captured at successful submission (in English)."
+        },
+        {
+          "path": "frontend/src/components/order/CartSheet.tsx",
+          "operation": "modify",
+          "description": "Add a prominent 'Checkout' action that opens CheckoutDialog and passes the current cart snapshot + subtotal for summary display; ensure checkout is reachable from cart."
+        },
+        {
+          "path": "frontend/src/utils/orderMeta.ts",
+          "operation": "create",
+          "description": "Persist lightweight per-order client metadata (e.g., createdAt timestamp keyed by order id) in localStorage to support displaying timestamps later in 'My Orders' even if backend order objects do not include time."
+        }
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "summary": "Connect checkout submission and order history to the backend using useActor + React Query, and add a My Orders view accessible from site navigation for authenticated users.",
+      "acceptanceCriteria": [
+        "Frontend uses the existing useActor hook to call backend order APIs.",
+        "Order creation is implemented as a React Query mutation with loading state and error handling.",
+        "After successful order creation, the cart is cleared and 'My Orders' reflects the new order (via query invalidation/refetch).",
+        "A 'My Orders' section or page is accessible from the existing site navigation and displays a list of orders with: order id, date/time, status (at least 'Placed'), item count, and total amount.",
+        "All user-facing text is in English."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useCreateOrder.ts",
+          "operation": "create",
+          "description": "Implement a React Query mutation hook that uses the existing useActor hook to create an order, exposes loading/error state, and on success clears the cart and invalidates/refetches the caller orders query. (No backend secrets or authorization logic on the frontend.)"
+        },
+        {
+          "path": "frontend/src/hooks/useCallerOrders.ts",
+          "operation": "create",
+          "description": "Implement a React Query query hook that uses useActor to fetch the authenticated caller's orders and provides loading/error states for the My Orders UI."
+        },
+        {
+          "path": "frontend/src/components/orders/MyOrdersSection.tsx",
+          "operation": "create",
+          "description": "Create a 'My Orders' view as a section in the existing single-page site (with a stable section id for navigation). If the user is not authenticated (Internet Identity), show an access/login prompt instead of personal data. Display: order id, date/time (from local client metadata when available), status 'Placed', item count, and total amount (formatted in English)."
+        },
+        {
+          "path": "frontend/src/components/layout/SiteHeader.tsx",
+          "operation": "modify",
+          "description": "Add navigation access to 'My Orders' (scroll-to-section) and include an Internet Identity login/logout control using the authorization component guidance (useInternetIdentity). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/auth/LoginButton.tsx",
+          "operation": "create",
+          "description": "Add a reusable login/logout button using the authorization component’s frontend guidance (useInternetIdentity) and clear React Query cache on logout to avoid showing stale personal data. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire MyOrdersSection into the page layout (below menu/about/contact as appropriate) and ensure its section id is reachable from the header navigation."
+        },
+        {
+          "path": "frontend/src/components/order/CheckoutDialog.tsx",
+          "operation": "modify",
+          "description": "Wire CheckoutDialog submission to the useCreateOrder mutation (useActor + React Query), show loading state, show a readable error message on failure (keeping cart + inputs intact), and show confirmation on success; also record client-side timestamp in orderMeta storage for later display in My Orders."
+        }
+      ]
+    }
+  ]
+}

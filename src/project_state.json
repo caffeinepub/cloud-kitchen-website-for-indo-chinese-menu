@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 5,
+  "summary": "Website project for a cloud kitchen featuring Indo-Chinese menu details.",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-create-a-responsive-marketing-website-for-a-cloud-kitchen-that-clearly-presents-indo-chinese-menu-details-including-a-homepage-hero-section-a-menu-section-and-basic-business-information-sections-about-and-contact",
+      "title": "Create a responsive marketing website for a cloud kitchen that clearly presents Indo-Chinese menu details, including a homepage hero section, a menu section, and basic business information sections (About and Contact).",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-structured-indo-chinese-menu-ui-with-categories-and-item-cards-that-show-item-name-short-description-price-and-a-veg-non-veg-indicator",
+      "title": "Implement a structured Indo-Chinese menu UI with categories and item cards that show: item name, short description, price, and a veg/non-veg indicator.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-basic-filtering-and-search-for-the-menu-so-users-can-quickly-find-items-by-name-keyword-and-filter-by-veg-non-veg",
+      "title": "Add basic filtering and search for the menu so users can quickly find items (by name/keyword) and filter by Veg/Non-Veg.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-contact-section-that-includes-clearly-labeled-placeholders-for-cloud-kitchen-address-service-area-phone-number-and-operating-hours-stored-as-editable-constants-in-the-frontend-code",
+      "title": "Add a Contact section that includes clearly labeled placeholders for cloud kitchen address/service area, phone number, and operating hours (stored as editable constants in the frontend code).",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-coherent-distinct-visual-theme-across-the-site-colors-typography-spacing-components-appropriate-for-a-food-restaurant-brand-without-using-a-blue-and-purple-color-scheme",
+      "title": "Apply a coherent, distinct visual theme across the site (colors, typography, spacing, components) appropriate for a food/restaurant brand, without using a blue-and-purple color scheme.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-and-render-generated-static-image-assets-for-the-site-hero-banner-and-logo-stored-under-frontend-public-assets-generated-and-reference-them-from-the-ui-no-backend-routing-for-images",
+      "title": "Add and render generated static image assets for the site (hero banner and logo), stored under frontend/public/assets/generated, and reference them from the UI (no backend routing for images).",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-online-ordering-ui-that-lets-users-add-menu-items-to-a-cart-from-the-menu-adjust-quantities-remove-items-clear-the-cart-and-see-an-order-subtotal",
+      "title": "Add an online ordering UI that lets users add menu items to a cart from the menu, adjust quantities, remove items, clear the cart, and see an order subtotal.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-checkout-flow-that-collects-order-details-order-type-customer-info-delivery-address-when-applicable-and-optional-special-instructions-and-validates-required-fields-before-allowing-submission",
+      "title": "Add a checkout flow that collects order details (order type, customer info, delivery address when applicable, and optional special instructions) and validates required fields before allowing submission.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-connect-the-new-checkout-ui-to-the-backend-using-the-existing-actor-react-query-setup-and-add-a-my-orders-view-that-shows-the-authenticated-user-s-submitted-orders",
+      "title": "Connect the new checkout UI to the backend using the existing actor/React Query setup, and add a 'My Orders' view that shows the authenticated user’s submitted orders.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create a cloud kitchen website that presents Indo-Chinese menu details.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Add online ordering capability to the cloud kitchen website.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Implement backend order storage and APIs to create an order and retrieve orders for the currently authenticated caller (Internet Identity principal).",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Cloud kitchen website for Indo-Chinese menu",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}
